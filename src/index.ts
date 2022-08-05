@@ -55,7 +55,7 @@ function addFormats(ajv: Ajv, list: FormatName[], fs: DefinedFormats, exportName
 console.log(exportName);
 console.log(ajv.opts.code.formats);
   ajv.opts.code.formats ??= _`() => {
-	import { ${exportName} } from "ajv-formats/dist/formats";
+	import ${exportName} from "ajv-formats/dist/formats";
 	return ${exportName};
 }();`
   for (const f of list) ajv.addFormat(f, fs[f])

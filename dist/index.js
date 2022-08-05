@@ -30,7 +30,7 @@ function addFormats(ajv, list, fs, exportName) {
     console.log(exportName);
     console.log(ajv.opts.code.formats);
     (_a = (_b = ajv.opts.code).formats) !== null && _a !== void 0 ? _a : (_b.formats = (0, codegen_1._) `() => {
-	import { ${exportName} } from "ajv-formats/dist/formats";
+	import ${exportName} from "ajv-formats/dist/formats";
 	return ${exportName};
 }();`);
     for (const f of list)
