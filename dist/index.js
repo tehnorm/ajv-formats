@@ -24,8 +24,15 @@ formatsPlugin.get = (name, mode = "full") => {
         throw new Error(`Unknown format "${name}"`);
     return f;
 };
-// @ts-ignore
 function addFormats(ajv, list, fs, exportName) {
+    var _a;
+    var _b;
+    console.log(exportName);
+    console.log(ajv.opts.code.formats);
+    (_a = (_b = ajv.opts.code).formats) !== null && _a !== void 0 ? _a : (_b.formats = (0, codegen_1._) `() => {
+	import { ${exportName} } from "ajv-formats/dist/formats";
+	return ${exportName};
+}();`);
     for (const f of list)
         ajv.addFormat(f, fs[f]);
 }
