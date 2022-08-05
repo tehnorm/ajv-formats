@@ -13,6 +13,7 @@
     "prettier:write": "prettier --write \"./**/*.{md,json,yaml,js,ts}\"",
     "prettier:check": "prettier --list-different \"./**/*.{md,json,yaml,js,ts}\"",
     "eslint": "eslint --ext .ts ./src/**/*",
+    "stupid": "npm run build && jest --silent=false",
     "test-spec": "jest",
     "test-cov": "jest --coverage",
     "test": "npm run prettier:check && npm run build && npm run eslint && npm run test-cov",
