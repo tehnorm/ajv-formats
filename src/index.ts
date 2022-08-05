@@ -54,10 +54,15 @@ formatsPlugin.get = (name: FormatName, mode: FormatMode = "full"): Format => {
 function addFormats(ajv: Ajv, list: FormatName[], fs: DefinedFormats, exportName: Name): void {
 console.log(exportName);
 console.log(ajv.opts.code.formats);
-  ajv.opts.code.formats ??= _`() => {
-	import ${exportName} from "ajv-formats/dist/formats";
-	return ${exportName};
-}();`
+  ajv.opts.code.formats ??= _`(async () => {
+	let module
+	try {
+		module = await import("ajv-formats/dist/formats.js");
+	} catch(e) {
+		throw(e);
+	}
+	return module.${exportName};
+})()`
   for (const f of list) ajv.addFormat(f, fs[f])
 }
 

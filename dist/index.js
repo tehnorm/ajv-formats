@@ -29,10 +29,15 @@ function addFormats(ajv, list, fs, exportName) {
     var _b;
     console.log(exportName);
     console.log(ajv.opts.code.formats);
-    (_a = (_b = ajv.opts.code).formats) !== null && _a !== void 0 ? _a : (_b.formats = (0, codegen_1._) `() => {
-	import ${exportName} from "ajv-formats/dist/formats";
-	return ${exportName};
-}();`);
+    (_a = (_b = ajv.opts.code).formats) !== null && _a !== void 0 ? _a : (_b.formats = (0, codegen_1._) `(async () => {
+	let module
+	try {
+		module = await import("ajv-formats/dist/formats.js");
+	} catch(e) {
+		throw(e);
+	}
+	return module.${exportName};
+})()`);
     for (const f of list)
         ajv.addFormat(f, fs[f]);
 }
